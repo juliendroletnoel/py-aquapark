@@ -22,8 +22,8 @@ during validation. Error messages can be skipped.
 Its `__init__` method takes `name`, `age`, `weight`, and `height`. `Visitor` does not have any limitations.
 
 
-#### 3. `SlideLimitationValidator` class, inherited from `ABC` class
-Its `__init__` method takes `age`, `weight`, and `height`. No additional abstract methods are required.
+#### 3. `SlideLimitationValidator` class
+Its `__init__` method takes `age`, `weight`, and `height`. No additional methods are needed here.
 This is a base class for Validators, so no validation is needed.
 
 
