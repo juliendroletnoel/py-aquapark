@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import Type
 
 
 class IntegerRange:
@@ -54,9 +55,11 @@ class ChildrenSlideLimitationValidator(SlideLimitationValidator):
     
     def __init__(self,
                  age: int,
-                 height: int,
-                 weight: int) -> None:
-        super().__init__(age, height, weight)
+                 weight: int,
+                 height: int) -> None:
+        super().__init__(age = age, 
+                         weight = weight,
+                         height = height)
 
 
 class AdultSlideLimitationValidator(SlideLimitationValidator):
@@ -66,27 +69,28 @@ class AdultSlideLimitationValidator(SlideLimitationValidator):
 
     def __init__(self,
                  age: int,
-                 height: int,
-                 weight: int) -> None:
-        super().__init__(age, height, weight)
+                 weight: int,
+                 height: int) -> None:
+        super().__init__(age = age, 
+                         weight = weight,
+                         height = height)
 
 
 class Slide:
     def __init__(self,
                  name: str,
-                 limitation_class: SlideLimitationValidator) -> None:
+                 limitation_class: Type[SlideLimitationValidator]) -> None:
         self.name = name
         self.limition_class = limitation_class
 
+    def can_access(self, visitor: Visitor) -> bool:
+        try:
+            self.limition_class(age = visitor.age,
+                                weight = visitor.weight,
+                                height = visitor.height)
+        except TypeError:
+            return False
+        except ValueError:
+            return False
 
-def can_access(visitor: Visitor, slide: Slide) -> bool:
-    validator = None
-
-    try:
-        validator = None
-    except TypeError:
-        return False
-    except ValueError:
-        return False
-
-    return True
+        return True
