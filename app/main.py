@@ -81,13 +81,13 @@ class Slide:
                  name: str,
                  limitation_class: Type[SlideLimitationValidator]) -> None:
         self.name = name
-        self.limition_class = limitation_class
+        self.limitation_class = limitation_class
 
     def can_access(self, visitor: Visitor) -> bool:
         try:
-            self.limition_class(age=visitor.age,
-                                weight=visitor.weight,
-                                height=visitor.height)
+            self.limitation_class(age=visitor.age,
+                                  weight=visitor.weight,
+                                  height=visitor.height)
         except TypeError:
             return False
         except ValueError:
