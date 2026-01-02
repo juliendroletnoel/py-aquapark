@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 from typing import Type
 
 
@@ -26,11 +26,11 @@ class IntegerRange:
 
 
 class Visitor:
-   def __init__(self,
-                name: str,
-                age: int,
-                weight: int,
-                height: int) -> None:
+    def __init__(self,
+                 name: str,
+                 age: int,
+                 weight: int,
+                 height: int) -> None:
         self.name = name
         self.age = age
         self.weight = weight
@@ -52,14 +52,14 @@ class ChildrenSlideLimitationValidator(SlideLimitationValidator):
     age = IntegerRange(4, 14)
     height = IntegerRange(80, 120)
     weight = IntegerRange(20, 50)
-    
+
     def __init__(self,
                  age: int,
                  weight: int,
                  height: int) -> None:
-        super().__init__(age = age, 
-                         weight = weight,
-                         height = height)
+        super().__init__(age=age,
+                         weight=weight,
+                         height=height)
 
 
 class AdultSlideLimitationValidator(SlideLimitationValidator):
@@ -71,9 +71,9 @@ class AdultSlideLimitationValidator(SlideLimitationValidator):
                  age: int,
                  weight: int,
                  height: int) -> None:
-        super().__init__(age = age, 
-                         weight = weight,
-                         height = height)
+        super().__init__(age=age,
+                         weight=weight,
+                         height=height)
 
 
 class Slide:
@@ -85,9 +85,9 @@ class Slide:
 
     def can_access(self, visitor: Visitor) -> bool:
         try:
-            self.limition_class(age = visitor.age,
-                                weight = visitor.weight,
-                                height = visitor.height)
+            self.limition_class(age=visitor.age,
+                                weight=visitor.weight,
+                                height=visitor.height)
         except TypeError:
             return False
         except ValueError:
